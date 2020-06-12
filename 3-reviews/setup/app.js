@@ -37,3 +37,63 @@ const reviews = [
       "Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ",
   },
 ];
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+const dataLength = reviews.length;
+const picture = document.getElementById('person-img');
+const author = document.getElementById('author');
+const job = document.getElementById('job');
+const info = document.getElementById('info');
+
+const reviewElement = document.getElementsByClassName('review')[0];
+
+function updateReview(index) {
+  picture.setAttribute( 'src', reviews[index].img );
+  
+  author.textContent= reviews[index].name;
+  
+  job.textContent = reviews[index].job;
+
+  info.textContent= reviews[index].text;
+
+  reviewElement.dataset.currentId = index;
+}
+
+updateReview(0);
+
+const prevbtn = document.getElementsByClassName('prev-btn')[0];
+const nextbtn = document.getElementsByClassName('next-btn')[0];
+const randombtn = document.getElementsByClassName('random-btn')[0];
+
+prevbtn.addEventListener('click', changeReview );
+nextbtn.addEventListener('click', changeReview );
+randombtn.addEventListener('click', changeReview );
+
+
+function changeReview(event) {
+  classes = event.currentTarget.classList;
+  var currentId = reviewElement.dataset.currentId;
+  if(classes.contains('next-btn')){
+    if ( currentId == dataLength-1 ){
+      currentId = 0;
+    }
+    else{
+      ++currentId;
+    }
+  }
+  else if(classes.contains('prev-btn')){
+    if ( currentId == 0 ){
+      currentId = dataLength-1;
+    }
+    else{
+      --currentId;
+    }
+    
+  }
+  else{
+    currentId = getRandomInt(4);
+  }
+  updateReview(currentId);
+}
