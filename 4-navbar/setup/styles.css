@@ -224,13 +224,14 @@ nav {
 }
 /* BY DEFAULT HIDE LINKS */
 .links {
-  /* height: 0;
+  height: auto;
   overflow: hidden;
-  transition: var(--transition); */
+  transition: max-height 0.3s ease-in-out;
+  max-height: 100rem;
 }
 /* TOGGLE CLASS */
-.show-links {
-  height: 10rem;
+.links.collapsed {
+  max-height: 0;
 }
 @media screen and (min-width: 800px) {
   .nav-center {
